@@ -48,7 +48,9 @@
             "id": "input",
             "name": "input files",
             "type": "File",
-            "parent": "resource"
+            "parent": "resource",
+            "command-line-key": "[INPUT]",
+            "command-line-flag": "-i"
         },
         {
             "id": "no-cubic",
