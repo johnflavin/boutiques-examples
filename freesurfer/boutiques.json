@@ -15,8 +15,8 @@
             "id": "subject",
             "name": "Image session label",
             "description": "XNAT image session label. Used as 'subject' label in recon-all.",
-            "type": "XPath",
-            "path-to-value": "/@label",
+            "type": "Property",
+            "path-to-value": "label",
             "command-line-key": "[SUBJECT]",
             "command-line-flag": "-s",
             "parent": "session"
