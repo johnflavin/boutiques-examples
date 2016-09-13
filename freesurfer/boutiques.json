@@ -16,7 +16,7 @@
             "name": "Image session label",
             "description": "XNAT image session label. Used as 'subject' label in recon-all.",
             "type": "Property",
-            "path-to-value": "label",
+            "path-template": "label",
             "command-line-key": "[SUBJECT]",
             "command-line-flag": "-s",
             "parent": "session"
@@ -26,14 +26,14 @@
             "name": "T1 scantype",
             "description": "Scan type of T1 scans",
             "type": "Config",
-            "path-to-value": "params/mr_scan_type"
+            "path-template": "params/mr_scan_type"
         },
         {
             "id": "t1",
             "name": "Input T1 scan",
             "description": "Scan on which to run recon-all",
             "type": "Scan",
-            "path-to-value": "/scans[type=[t1-scantype]]",
+            "path-template": "/scans[type=[t1-scantype]]",
             "requires-inputs": "t1-scantype",
             "parent": "session"
         },
