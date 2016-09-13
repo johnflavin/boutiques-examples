@@ -1,0 +1,94 @@
+{
+    "name": "Freesurfer test",
+    "tool-version": "0.1",
+    "description": "Test writing a Boutiques descriptor for Freesurfer",
+    "command-line": "recon-all [SUBJECT] [INPUT] [OUTPUT] [NO_CUBIC] [MPRAGE] [HIPPO] [OTHER_ARGS]",
+    "docker-image": "flavin/freesurfer-5.3-hcp-patch",
+    "schema-version": "0.3",
+    "inputs": [
+        {
+            "id": "session",
+            "name": "XNAT image session",
+            "type": "Session"
+        },
+        {
+            "id": "subject",
+            "name": "Image session label",
+            "description": "XNAT image session label. Used as 'subject' label in recon-all.",
+            "type": "XPath",
+            "path-to-value": "/@label",
+            "command-line-key": "[SUBJECT]",
+            "command-line-flag": "-s",
+            "parent": "session"
+        },
+        {
+            "id": "t1-scantype",
+            "name": "T1 scantype",
+            "description": "Scan type of T1 scans",
+            "type": "Config",
+            "path-to-value": "params/mr_scan_type"
+        },
+        {
+            "id": "t1",
+            "name": "Input T1 scan",
+            "description": "Scan on which to run recon-all",
+            "type": "Scan",
+            "path-to-value": "/scans[type=[t1-scantype]]",
+            "requires-inputs": "t1-scantype",
+            "parent": "session"
+        },
+        {
+            "id": "resource",
+            "name": "Input resource type",
+            "description": "Resource type of input T1",
+            "type": "Resource",
+            "parent": "t1"
+        },
+        {
+            "id": "input",
+            "name": "input files",
+            "type": "File",
+            "parent": "resource"
+        },
+        {
+            "id": "no-cubic",
+            "name": "no-cubic",
+            "type": "Flag",
+            "description": "Set the -nocubic flag",
+            "command-line-key": "[NO_CUBIC]",
+            "optional": true,
+            "command-line-flag": "-nocubic",
+            "default-value": false
+        },
+        {
+            "id": "mprage",
+            "name": "mprage",
+            "type": "Flag",
+            "description": "Set the -mprage flag",
+            "command-line-key": "[MPRAGE]",
+            "optional": true,
+            "command-line-flag": "-mprage",
+            "default-value": false
+        },
+        {
+            "id": "hippo-subfields",
+            "name": "Hippocampal subfields",
+            "type": "Flag",
+            "description": "Segment hippocampal subfields",
+            "command-line-key": "[HIPPO]",
+            "optional": true,
+            "command-line-flag": "-hippo-subfields",
+            "default-value": false
+        },
+        {
+            "id": "other-args",
+            "name": "Other arguments",
+            "type": "String",
+            "description": "Additional arguments to pass to recon-all",
+            "command-line-key": "[OTHER_ARGS]",
+            "optional": true
+        }
+    ],
+    "groups": {},
+    "output-files": {}
+}
